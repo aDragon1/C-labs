@@ -28,9 +28,9 @@ int main(void)
     // Task1:
     float x, y;
     printf("Введите x,y для задания 1: \n");
-    printf("x =");
+    printf("x = ");
     scanf("%f", &x);
-    printf("y =");
+    printf("y = ");
     scanf("%f", &y);
     printf("F(%g , %g) = %g \n", x, y, task1(-1, 0));
 

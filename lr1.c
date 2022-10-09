@@ -34,13 +34,13 @@ int main (void)
     // Task1:
     float x,y;
     printf("Введите x,y для задания 1: \n");
-    printf("x ="); scanf("%f",&x);
-    printf("y ="); scanf("%f",&y);
+    printf("x = "); scanf("%f",&x);
+    printf("y = "); scanf("%f",&y);
     printf("Задание 1 - %f\n\n", task1(x,y));
 
     // Task2:
     float r1,r2,r3;
-    printf("Введите r1 r2 r3 для задания 2: (через пробел)\n");
+    printf("Введите r1 r2 r3 для задания 2: \n");
     printf("r1 ="); scanf("%f",&r1);
     printf("r2 ="); scanf("%f",&r2);
     printf("r3 ="); scanf("%f",&r3);
