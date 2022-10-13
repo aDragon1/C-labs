@@ -53,7 +53,7 @@ int getArr1DSum(int arr[], int size)
 int main(void)
 {
     int n, m;
-    printf("Введите длинну одномерного массива для задания 1: \n");
+    printf("Enter the length of 1D array for task 1: \n");
     scanf("%d", &n);
 
     int arr[n], reverseArray[n]; // Init
@@ -63,10 +63,10 @@ int main(void)
     for (int i = 0; i < n; i++)
         reverseArray[i] = arr[n - 1 - i];
 
-    printArray("Массив - ", arr, n);
-    printArray("Обратный массив - ", reverseArray, n);
+    printArray("Array - ", arr, n);
+    printArray("Reverse array - ", reverseArray, n);
 
-    printf("\nВведите длинны двумерного массива для задания 2: \n");
+    printf("Enter the length's of 2D array for task 2: \n");
     scanf("%d %d", &m, &n);
 
     int arr2d[m][n]; // init
@@ -74,7 +74,7 @@ int main(void)
         for (int j = 0; j < n; j++)
             arr2d[i][j] = random(100, 5); // Fill
 
-    print2DArray("Исходный двумерный массив - ", m, n, arr2d);
+    print2DArray("Sorce 2D array - ", m, n, arr2d);
     int minRow, minSum = 0;
     for (int i = 0; i < m; i++)
     {
@@ -85,7 +85,7 @@ int main(void)
             minRow = i;
         }
     }
-    printf("Строка с минимальной суммой - %d, \n Сумма этой строки - %d \n", minRow, minSum);
+    printf("The row with the minimum amount is %d, \n The sum of this row is %d \n", minRow, minSum);
 
     return 0;
 }

@@ -28,7 +28,7 @@ float task2()
         i++;
     }
 
-    printf("При заданной точности %g ряд имеет %g членов \n", eps, i);
+    printf("For a given precision of %g, the series has %g members \n", eps, i);
     return s;
 }
 
@@ -43,7 +43,7 @@ int main(void)
     }
 
     // Task2:
-    printf("\nСумма ряда  = %g", task2());
+    printf("\nSum of a series  = %g", task2());
 
     return 0;
 }

@@ -25,7 +25,7 @@ int main(void)
 {
     // Task1:
     float x, y;
-    printf("Введите x,y для задания 1: \n");
+    printf("Enter the x,y for task 1: \n");
     printf("x = ");
     scanf("%f", &x);
     printf("y = ");
@@ -33,9 +33,9 @@ int main(void)
     printf("F(%g , %g) = %g \n", x, y, task1(x, y));
 
     // Task2:
-    printf("Введите 2 числа для задания 2: \n");
+    printf("Enter 2 numbers for task 2: \n");
     scanf("%f %f", &x, &y);
-    max(x, y) == 1 ? printf("%g > %g => выводим %3g", x, y, x) : printf("%g <= %g => выводим %g %g", x, y, x, y);
+    max(x, y) == 1 ? printf("%g > %g => printing %3g", x, y, x) : printf("%g <= %g => printing %g %g", x, y, x, y);
 
     return 0;
 }
