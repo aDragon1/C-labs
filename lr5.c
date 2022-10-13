@@ -1,9 +1,6 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-char *Rtext = "horse horse apple pen kitchen pen dog";
 
 size_t substrCount(char *str, char *substr)
 {
@@ -11,60 +8,64 @@ size_t substrCount(char *str, char *substr)
 
     while (1)
     {
-        str = strstr(str, substr); // Возвращает указатель на первое вхождение подстроки в строку, либо NULL, если вхождений нет
+        str = strstr(str, substr); // Returns pointerto to the first match substr into str or NULL if not any
         if (!str)
             break;
         ++counter;
-        str += strlen(substr); // Идём дальше по строке (откидываем то, что уже найдено)
+        str += strlen(substr); // Iterate throw the string
     }
+    free(str);
     return counter;
+}
+
+char **getTokensFromTextAsArray(char *Rtext, char *delims)
+{
+    // Get the text copy
+    char *text = malloc(strlen(Rtext) + 1);
+    strcpy(text, Rtext);
+
+    char *token = strtok(text, delims);       // get the first token
+    char **tokens = malloc(strlen(text) + 1); // init array of tokens as length of the text
+    int tokenIndex = 0;
+    tokens[tokenIndex++] = token;
+
+    while (token) // fill the tokens array with individual token
+    {
+        token = strtok(NULL, delims);
+        tokens[tokenIndex++] = token;
+    }
+    return tokens;
 }
 
 int main(void)
 {
     char delims[10] = " ,.\t:;\"\'?!";
-    char *text = malloc(strlen(Rtext) + 1);
-    strcpy(text, Rtext);
 
-    char **tokens = malloc(strlen(text) + 1);
-    char *res = malloc(strlen(text) + 1);
-    int tokenIndex = 0;
+    char *text = "horse horse apple pen kitchen pen dog"; // source text
+    char resString[strlen(text) + 1];
+    printf("\n Source text - %s\n\n", text);
 
-    printf("\nИсходный текст -\n%s\n\n", text);
+    char **tokens = getTokensFromTextAsArray(text, delims); // array of tokens (word's, splited by delimeters)
 
-    char *token = strtok(text, delims);
-    tokens[tokenIndex++] = token;
-
-    while (token)
-    {
-        token = strtok(NULL, delims);
-        tokens[tokenIndex++] = token;
-    }
-
-    printf("Массив токенов -\n");
-    for (int i = 0; i < tokenIndex - 1; i++)
-        printf("%d-й токен - %s\n", i, tokens[i]);
-
+    printf("Tokens array -\n");
+    for (int i = 0; i < sizeof(tokens) - 1; i++)
+        printf("%d-th token - %s\n", i, tokens[i]);
     printf("\n\n");
 
-    for (size_t i = 0; i < tokenIndex - 1; i++)
+    for (size_t i = 0; i < sizeof(tokens) - 1; i++)
     {
-        size_t counterTokenInString = substrCount(Rtext, tokens[i]);
-        printf("Токен %s входит в строку %d раз\n", tokens[i], counterTokenInString);
+        size_t counterTokenInString = substrCount(text, tokens[i]);
+        printf("Token \"%s\" enters the stirng %d times\n", tokens[i], counterTokenInString);
         if (counterTokenInString == 1)
         {
-            strcat(res, tokens[i]);
-            strcat(res, " ");
+            strcat(resString, tokens[i]);
+            strcat(resString, " ");
         }
     };
 
-    printf("\n Итоговая строка уникальных слов -  \n %s", res);
-
+    printf("\n Result string of unic word's -  \n %s", resString);
     printf("\n\n");
 
-    free(text);
-    free(res);
-    // free(tokens);
-
+    free(tokens);
     return 0;
 }
