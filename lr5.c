@@ -3,21 +3,37 @@
 #include <stdlib.h>
 #include <string.h>
 
-char *Rtext = "А ещё независимые государства объединены в целые кластеры себе подобных. Господа, граница обучения кадров выявляет срочную потребность переосмысления внешнеэкономических политик. Следует отметить, что высокое качество позиционных исследований способствует повышению качества модели развития.";
+char *Rtext = "horse horse apple pen kitchen pen dog";
+
+size_t substrCount(char *str, char *substr)
+{
+    size_t counter = 0;
+
+    while (1)
+    {
+        str = strstr(str, substr); // Возвращает указатель на первое вхождение подстроки в строку, либо NULL, если вхождений нет
+        if (!str)
+            break;
+        ++counter;
+        str += strlen(substr); // Идём дальше по строке (откидываем то, что уже найдено)
+    }
+    return counter;
+}
 
 int main(void)
 {
-    char delims[10] = " ,.-!?;";
+    char delims[10] = " ,.\t:;\"\'?!";
     char *text = malloc(strlen(Rtext) + 1);
     strcpy(text, Rtext);
 
     char **tokens = malloc(strlen(text) + 1);
-    int tokenIndex = 1;
+    char *res = malloc(strlen(text) + 1);
+    int tokenIndex = 0;
 
     printf("\nИсходный текст -\n%s\n\n", text);
 
     char *token = strtok(text, delims);
-    tokens[0] = token;
+    tokens[tokenIndex++] = token;
 
     while (token)
     {
@@ -27,11 +43,28 @@ int main(void)
 
     printf("Массив токенов -\n");
     for (int i = 0; i < tokenIndex - 1; i++)
-        printf("%s ", tokens[i]);
+        printf("%d-й токен - %s\n", i, tokens[i]);
 
-    printf("\n%s\n", text);
+    printf("\n\n");
 
-    printf("\n\n\n\n\n\n");
+    for (size_t i = 0; i < tokenIndex - 1; i++)
+    {
+        size_t counterTokenInString = substrCount(Rtext, tokens[i]);
+        printf("Токен %s входит в строку %d раз\n", tokens[i], counterTokenInString);
+        if (counterTokenInString == 1)
+        {
+            strcat(res, tokens[i]);
+            strcat(res, " ");
+        }
+    };
+
+    printf("\n Итоговая строка уникальных слов -  \n %s", res);
+
+    printf("\n\n");
+
+    free(text);
+    free(res);
+    // free(tokens);
 
     return 0;
 }
