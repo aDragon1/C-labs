@@ -12,7 +12,7 @@ size_t substrCount(char *str, char *substr)
         if (!str)
             break;
         ++counter;
-        str += strlen(substr); // Iterate throw the string
+        str += strlen(substr); // Iterate through the string
     }
     free(str);
     return counter;
@@ -21,7 +21,7 @@ size_t substrCount(char *str, char *substr)
 char **getTokensFromTextAsArray(char *Rtext, char *delims)
 {
     // Get the text copy
-    char *text = malloc(strlen(Rtext) + 1);
+    char *text = malloc(strlen(Rtext + 1) * sizeof(char));
     strcpy(text, Rtext);
 
     char *token = strtok(text, delims);       // get the first token
@@ -34,6 +34,7 @@ char **getTokensFromTextAsArray(char *Rtext, char *delims)
         token = strtok(NULL, delims);
         tokens[tokenIndex++] = token;
     }
+    // free(text);
     return tokens;
 }
 
@@ -42,7 +43,8 @@ int main(void)
     char delims[10] = " ,.\t:;\"\'?!";
 
     char *text = "horse horse apple pen kitchen pen dog"; // source text
-    char resString[strlen(text) + 1];
+    // char resString[strlen(text) + 1];
+    char *resString = malloc(strlen(text + 1) * sizeof(char));
     printf("\n Source text - %s\n\n", text);
 
     char **tokens = getTokensFromTextAsArray(text, delims); // array of tokens (word's, splited by delimeters)
@@ -66,6 +68,7 @@ int main(void)
     printf("\n Result string of unic word's -  \n %s", resString);
     printf("\n\n");
 
+    // free(resString);
     free(tokens);
     return 0;
 }
