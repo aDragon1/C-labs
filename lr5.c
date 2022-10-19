@@ -23,7 +23,6 @@ char **getTokensFromTextAsArray(char *Rtext, char *delims)
     // Get the text copy
     char *text = malloc(strlen(Rtext + 1) * sizeof(char));
     strcpy(text, Rtext);
-
     char *token = strtok(text, delims);       // get the first token
     char **tokens = malloc(strlen(text) + 1); // init array of tokens as length of the text
     int tokenIndex = 0;
@@ -34,7 +33,7 @@ char **getTokensFromTextAsArray(char *Rtext, char *delims)
         token = strtok(NULL, delims);
         tokens[tokenIndex++] = token;
     }
-    // free(text);
+    free(text);
     return tokens;
 }
 
@@ -43,12 +42,10 @@ int main(void)
     char delims[10] = " ,.\t:;\"\'?!";
 
     char *text = "horse horse apple pen kitchen pen dog"; // source text
-    // char resString[strlen(text) + 1];
     char *resString = malloc(strlen(text + 1) * sizeof(char));
     printf("\n Source text - %s\n\n", text);
 
     char **tokens = getTokensFromTextAsArray(text, delims); // array of tokens (word's, splited by delimeters)
-
     printf("Tokens array -\n");
     for (int i = 0; i < sizeof(tokens) - 1; i++)
         printf("%d-th token - %s\n", i, tokens[i]);
@@ -68,7 +65,7 @@ int main(void)
     printf("\n Result string of unic word's -  \n %s", resString);
     printf("\n\n");
 
-    // free(resString);
+    free(resString);
     free(tokens);
     return 0;
 }
